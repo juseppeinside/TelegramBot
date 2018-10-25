@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import telebot
 
+TOKEN = "640743547:AAHWPuEhr5twym7IkhAQ28ciGRpSRwDG4Vc"
 bot = telebot.TeleBot(TOKEN)
 upd = bot.get_updates()
 last_upd = upd[-1]
