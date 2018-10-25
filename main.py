@@ -10,10 +10,10 @@ last_upd = upd[-1]
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     print(message.text)
-    if message.text == "ты тупой":
+    if message.text == "1":
         bot.send_message(message.chat.id, "Сори, но мираж не играю")
-    elif message.text == "говно из жопы":
-        bot.send_message(message.chat.id, "шоколад")
+    elif message.text == "2":
+        bot.send_message(message.chat.id, "Шоколад")
     else:
         bot.send_message(message.chat.id, "Полный крииинж")
 
