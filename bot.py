@@ -1,7 +1,5 @@
 import requests
 
-
-TOKEN = "640743547:AAHWPuEhr5twym7IkhAQ28ciGRpSRwDG4Vc"
 T_URL = 'https://api.telegram.org/bot' + TOKEN + '/'
 
 def sendMessage(chat_id, text):
