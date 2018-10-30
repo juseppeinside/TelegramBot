@@ -1,3 +1,5 @@
+import telebot
+
 bot = telebot.TeleBot(TOKEN)
 upd = bot.get_updates()
 last_upd = upd[-1]
