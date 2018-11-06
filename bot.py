@@ -1,20 +1,44 @@
-import telebot
-
-bot = telebot.TeleBot(TOKEN)
-upd = bot.get_updates()
-last_upd = upd[-1]
+import requests
+from time import sleep
 
 
-@bot.message_handler(content_types=['text'])
-def handle_text(message):
-    print(message.text)
-    if message.text == "ты тупой":
-        bot.send_message(message.chat.id, "Сори, но мираж не играю")
-    elif message.text == "говно из жопы":
-        bot.send_message(message.chat.id, "шоколад")
-    else:
-        bot.send_message(message.chat.id, "Полный крииинж")
+BOT_TOKEN = ’your telegram bots token'
+T_URL = 'https://api.telegram.org/bot' + BOT_TOKEN + '/'
+
+
+def getUpdates():
+    response = requests.get(T_URL + 'getUpdates')
+    return response.json()
+
+
+def lastUpdate(data):
+    results = data['result']
+    total_updates = len(results) - 1
+    return results[total_updates]
+
+
+def getChatId(update):
+    chat_id = update['message']['chat']['id']
+    return chat_id
+
+
+def sendMessage(chat_id, text):
+    params = {'chat_id': chat_id, 'text': text}
+    response = requests.post(T_URL + 'sendMessage', data = params)
+    return response
+
+
+def main():
+    update_id = lastUpdate(getUpdates())['update_id']
+    while True:
+        if update_id == lastUpdate(getUpdates())['update_id']:
+            sendMessage(getChatId(lastUpdate(getUpdates())), 'test')
+            update_id += 1
+            print(lastUpdate(getUpdates())['message']['text'])
+    sleep(1)
 
 
 
-bot.polling(none_stop=True,  interval=0)
+
+if __name__ == '__main__':
+    main()
